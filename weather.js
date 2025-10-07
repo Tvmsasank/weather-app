@@ -32,7 +32,11 @@ const city = document.getElementById('cityInput').value.trim();
   }
 
 const url = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&appid=${API_KEY}&units=${currentUnit}`;
-  fetchWeather(url);
+const button = document.querySelector('button');
+button.disabled = true;
+  console.log("Fetching:", url);
+    fetchWeather(url);
+    setTimeout(() => button.disabled = false, 1000); // re-enable after 1s
 }
 
 // Get weather by user's location
@@ -74,6 +78,18 @@ function fetchWeather(url) {
       const description = weather[0].description;
       const icon = weather[0].icon;
       const temp = main.temp;
+      document.body.className = ''; // clear previous
+      const condition = weather[0].main.toLowerCase(); // e.g. "rain"
+      document.body.classList.add(condition); // apply background class
+      const humidity = main.humidity;
+      const wind = data.wind.speed;
+
+      resultDiv.innerHTML += `
+      <p>Humidity: ${humidity}%</p>
+      <p>Wind: ${wind} m/s</p>
+      `;
+
+
       const countryCode = sys.country;
 
       // Timezone adjustment
@@ -97,6 +113,7 @@ function fetchWeather(url) {
       `;
     })
     .catch(error => {
-      resultDiv.innerHTML = `<p>Error: ${error.message}</p>`;
+        resultDiv.innerHTML = `<p id="errorMsg">Error: ${error.message}</p>`;
     });
+
 }
