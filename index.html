@@ -1,57 +1,62 @@
-  <!DOCTYPE html>
-  <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <title>Advanced Weather App</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        max-width: 500px;
-        margin: 40px auto;
-        padding: 20px;
-        text-align: center;
-        background: #f2f2f2;
-        border-radius: 10px;
-      }
-      input, button {
-        padding: 8px;
-        margin-top: 10px;
-      }
-      #weatherResult img {
-        margin: 10px 0;
-      }
-      #errorMsg {
-        color: red;
-        margin-top: 10px;
-        font-weight: bold;
-      }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Advanced Weather App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 500px;
+      margin: 40px auto;
+      padding: 20px;
+      text-align: center;
+      background: #f2f2f2;
+      border-radius: 10px;
+      transition: background 0.5s ease;
+    }
+    input, button {
+      padding: 8px;
+      margin-top: 10px;
+    }
+    #weatherResult img {
+      margin: 10px 0;
+    }
+    #errorMsg {
+      color: red;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+    }
 
-      label {
-        display: block;
-        margin-top: 10px;
-      }
-      .clear { background: linear-gradient(to top, #fceabb, #f8b500); }
-      .rain { background: linear-gradient(to top, #bdc3c7, #2c3e50); }
-      .clouds { background: linear-gradient(to top, #d7d2cc, #304352); }
+    /* Weather background themes */
+    .clear { background: linear-gradient(to top, #fceabb, #f8b500); }
+    .rain { background: linear-gradient(to top, #bdc3c7, #2c3e50); }
+    .clouds { background: linear-gradient(to top, #d7d2cc, #304352); }
+    .snow { background: linear-gradient(to top, #e6dada, #274046); }
+    .mist, .haze, .fog { background: linear-gradient(to top, #757f9a, #d7dde8); }
+    .thunderstorm { background: linear-gradient(to top, #141e30, #243b55); }
+    .drizzle { background: linear-gradient(to top, #89f7fe, #66a6ff); }
+  </style>
+</head>
+<body>
 
-    </style>
-  </head>
-  <body>
+  <h2>🌤️ Advanced Weather App</h2>
 
-    <h2>🌤️ Advanced Weather App</h2>
+  <input type="text" id="cityInput" placeholder="Enter city name" />
+  <br />
+  <button onclick="getWeather()">Get Weather</button>
+  <button onclick="getWeatherByLocation()">📍 Use My Location</button>
 
-    <input type="text" id="cityInput" placeholder="Enter city name" />
-    <br />
-    <button onclick="getWeather()">Get Weather</button>
-    <button onclick="getWeatherByLocation()">📍 Use My Location</button>
+  <label>
+    <input type="checkbox" id="unitToggle" onchange="toggleUnits()" />
+    Show in Fahrenheit (°F)
+  </label>
 
-    <label>
-      <input type="checkbox" id="unitToggle" onchange="toggleUnits()" />
-      Show in Fahrenheit (°F)
-    </label>
+  <div id="weatherResult"></div>
 
-    <div id="weatherResult"></div>
-
-    <script src="weather.js"></script>
-  </body>
-  </html>
+  <script src="weather.js"></script>
+</body>
+</html>
