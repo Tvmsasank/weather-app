@@ -64,7 +64,19 @@ function fetchWeather(url) {
       const unitSymbol = currentUnit === 'metric' ? '°C' : '°F';
 
       updateAnimations(condition);
-      const timeString = new Date(Date.now() + timezone * 1000 - new Date().getTimezoneOffset() * 60000).toLocaleTimeString();
+      
+      const timeZoneName = "Asia/Kolkata"; // you can get this from APIs or a mapping 
+      const timeString = new Date().toLocaleTimeString("en-US", {
+      timeZone: timeZoneName,
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: false,
+      });
+
+      const formattedTime = `${timeString} hrs`;
+      console.log(formattedTime);
+
       const flagUrl = `https://flagcdn.com/48x36/${countryCode.toLowerCase()}.png`;
 
       resultDiv.innerHTML = `
@@ -74,7 +86,7 @@ function fetchWeather(url) {
         <p>${description}</p>
         <p>Humidity: ${humidity}%</p>
         <p>Wind: ${windSpeed} m/s</p>
-        <p>Local time: ${timeString}</p>
+        <p>Local time: ${timeString} hrs</p>
       `;
 
       document.getElementById('shareButtons').style.display = 'block';
