@@ -121,9 +121,13 @@ function clearAnimations() {
 
 function updateAnimations(condition) {
   document.body.className = condition;
+
   switch (condition) {
     case 'clear':
       createSunrays();
+      break;
+    case 'clouds':
+      createClouds();
       break;
     case 'rain':
     case 'drizzle':
@@ -135,6 +139,37 @@ function updateAnimations(condition) {
       break;
   }
 }
+
+function createClouds() {
+  const animContainer = document.getElementById('animationContainer');
+  const cloudContainer = document.createElement('div');
+  cloudContainer.className = 'cloud-container';
+
+  const numberOfClouds= 30;
+
+  for (let i = 0; i < numberOfClouds; i++) {
+    const cloud = document.createElement('div');
+    cloud.className = 'cloud';
+
+    const sizeScale = 0.5 + Math.random() * 1.5;
+    const duration = 60 + Math.random() * 60;
+
+    cloud.style.width = `${150 * sizeScale}px`;
+    cloud.style.height = `${75 * sizeScale}px`;
+
+    cloud.style.left = `${Math.random * 100}vh`;
+    cloud.style.top = `${Math.random * 100}vw`;
+
+    cloud.style.opacity = `${0.4 + Math.random() * 0.4}`;
+    cloud.style.animationDuration = `${duration}s`;
+    cloud.animationDelay = `${Math.random() * 10}s`;
+
+    cloudContainer.appendChild(cloud);
+  }
+
+  animContainer.appendChild(cloudContainer);
+}
+
 
 function createRain() {
   const animContainer = document.getElementById('animationContainer');
@@ -171,7 +206,10 @@ function createSunrays() {
   const animContainer = document.getElementById('animationContainer');
   const sunrays = document.createElement('div');
   sunrays.className = 'sunrays';
+  const sun = document.createElement('div');
+  sun.className = 'sun';
   animContainer.appendChild(sunrays);
+  animContainer.appendChild(sun);
 }
 
 function copyWeather() {
