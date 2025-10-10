@@ -168,7 +168,7 @@
 
     .snowflake {
       position: absolute;
-      color: rgb(127, 229, 255);
+      color: rgb(49, 214, 255);
       font-size: 1em;
       user-select: none;
       animation: snowfall linear infinite;
@@ -200,13 +200,28 @@
       margin-top: 20px;
       border-radius: 10px;
     }
+
+    body.dark {
+      background: #1e1e1e;
+      color: #f0f0f0;
+    
+    }
+    
+    body.dark input, body.dark button {
+      background: #000000;
+      color: #f0f0f0;
+      border: 1px solid #000000;
+    }
+
+
   </style>
 </head>
 <body>
-  <h2>🌤️ Advanced Weather App</h2>
+  <h1><b>🌤️ Advanced Weather App</b></h1>
 
   <input type="text" id="cityInput" placeholder="Enter city name" />
   <br />
+  <div id="suggestions" style="position: relative;"></div>
   <button onclick="getWeather()">Get Weather</button>
   <button onclick="getWeatherByLocation()">📍 Use My Location</button>
 
@@ -215,14 +230,18 @@
     Show in Fahrenheit (°F)
   </label>
 
-  <div id="weatherResult"></div>
+  <label>
+    <input type="checkbox" id="darkModeToggle" onchange="toggleDarkMode()"/>
+    🌙 Dark Mode
+  </label>
 
+  <div id="weatherResult"></div>
   <div id="shareButtons" style="margin-top: 15px; display: none;">
     <button onclick="copyWeather()">📋 Copy Summary</button>
     <button onclick="shareTwitter()">🐦 Share on Twitter</button>
   </div>
 
-  <div id="map"></div>
+  <div id="map">style="height: 300px; margin-top: 20px; border-radius: 10px;"></div>
   <div id="animationContainer"></div>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
